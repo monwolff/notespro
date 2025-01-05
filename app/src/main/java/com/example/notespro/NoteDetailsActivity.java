@@ -19,18 +19,24 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.util.Util;
 
+import jp.wasabeef.richeditor.RichEditor;
+
 import org.w3c.dom.Text;
 
 public class NoteDetailsActivity extends AppCompatActivity {
 
     EditText titleEditText;
-    EditText contentEditText;
+    //EditText contentEditText;
+    RichEditor contentEditText;
     ImageButton saveNoteBtn;
     ImageButton deleteNoteBtn;
     TextView pageTitleTextView;
     String title, content, docId;
     boolean isEditMode = false;
     //TextView deleteNoteTextViewBtn;
+    ImageButton boldBtn;
+    ImageButton italicBtn;
+    ImageButton underlineBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +49,19 @@ public class NoteDetailsActivity extends AppCompatActivity {
             return insets;
         });
 
+        //contentEditText.setPadding(12,0,12,0);
+
         titleEditText = findViewById(R.id.notes_title_text);
         contentEditText = findViewById(R.id.notes_content_text);
         saveNoteBtn = findViewById(R.id.save_note_btn);
         pageTitleTextView = findViewById((R.id.page_title));
         //deleteNoteTextViewBtn = findViewById(R.id.delete_note_text_view_btn);
         deleteNoteBtn = findViewById(R.id.delete_note_btn);
+
+        boldBtn = findViewById(R.id.bold_btn);
+        italicBtn = findViewById(R.id.italic_btn);
+        underlineBtn = findViewById(R.id.underline_btn);
+
 
         //receive data
         title = getIntent().getStringExtra("title");
@@ -60,7 +73,8 @@ public class NoteDetailsActivity extends AppCompatActivity {
         }
 
         titleEditText.setText(title);
-        contentEditText.setText(content);
+        //contentEditText.setText(content);
+        contentEditText.setHtml(content);
         if (isEditMode){
             pageTitleTextView.setText("Edit your note");
             //deleteNoteTextViewBtn.setVisibility(View.VISIBLE);
@@ -72,11 +86,16 @@ public class NoteDetailsActivity extends AppCompatActivity {
         //deleteNoteTextViewBtn.setOnClickListener((v)-> deleteNoteFromFirebase());
         deleteNoteBtn.setOnClickListener((v)-> deleteNoteFromFirebase());
 
+        boldBtn.setOnClickListener((v)-> contentEditText.setBold());
+        italicBtn.setOnClickListener((v)-> contentEditText.setItalic());
+        underlineBtn.setOnClickListener((v)-> contentEditText.setUnderline());
+
     }
 
     void saveNote(){
         String noteTitle = titleEditText.getText().toString();
-        String noteContent = contentEditText.getText().toString();
+        //String noteContent = contentEditText.getText().toString();
+        String noteContent = contentEditText.getHtml().toString();
         if (noteTitle==null || noteTitle.isEmpty()){
             titleEditText.setError("Title is required");
             return;

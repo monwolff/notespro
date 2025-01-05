@@ -41,6 +41,7 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/tile_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/title_bar_layout"
@@ -61,17 +62,17 @@
             android:layout_marginVertical="8dp"
             android:hint="Title"
             android:inputType="textCapSentences"
-            android:padding="12dp"
+            android:paddingBottom="12dp"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <EditText
+        <jp.wasabeef.richeditor.RichEditor
             android:id="@+id/notes_content_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="8dp"
-            android:gravity="top"
+            android:gravity="top|start"
             android:hint="Content"
             android:inputType="textCapSentences|textMultiLine"
             android:minLines="16"
@@ -93,6 +94,81 @@
         android:contentDescription="delete"
         android:visibility="gone"
         app:tint="@color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/tile_content">
+
+        <!--
+        <LinearLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bold_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bold" />
+
+            <Button
+                android:id="@+id/italic_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Italic" />
+
+            <Button
+                android:id="@+id/underline_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Underline" />
+
+        </LinearLayout>
+
+       -->
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/material_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="Editor Toolbar">
+
+            <ImageButton
+                android:id="@+id/bold_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_format_bold_24"
+                android:contentDescription="@string/bold"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="8dp" />
+
+            <ImageButton
+                android:id="@+id/italic_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_format_italic_24"
+                android:contentDescription="@string/italic"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="8dp" />
+
+            <ImageButton
+                android:id="@+id/underline_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_format_underlined_24"
+                android:contentDescription="@string/underline"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="8dp" />
+
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+    </LinearLayout>
 
 
 </RelativeLayout>
