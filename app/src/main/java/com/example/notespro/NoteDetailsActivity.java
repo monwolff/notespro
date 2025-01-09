@@ -1,6 +1,8 @@
 package com.example.notespro;
 
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -31,6 +33,7 @@ public class NoteDetailsActivity extends AppCompatActivity {
     String title, content, docId;
     boolean isEditMode = false;
     //TextView deleteNoteTextViewBtn;
+    ImageButton boldBtn, italicBtn, underlineBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,12 @@ public class NoteDetailsActivity extends AppCompatActivity {
         pageTitleTextView = findViewById((R.id.page_title));
         //deleteNoteTextViewBtn = findViewById(R.id.delete_note_text_view_btn);
         deleteNoteBtn = findViewById(R.id.delete_note_btn);
+        boldBtn = findViewById(R.id.bold_btn);
+        italicBtn = findViewById(R.id.italic_btn);
+        underlineBtn = findViewById(R.id.underline_btn);
+
+
+
 
         //receive data
         title = getIntent().getStringExtra("title");
@@ -71,6 +80,45 @@ public class NoteDetailsActivity extends AppCompatActivity {
 
         //deleteNoteTextViewBtn.setOnClickListener((v)-> deleteNoteFromFirebase());
         deleteNoteBtn.setOnClickListener((v)-> deleteNoteFromFirebase());
+
+        boldBtn.setOnClickListener((v)-> {
+            int start = contentEditText.getSelectionStart();
+            int end = contentEditText.getSelectionEnd();
+
+            if (start < end){
+                SpannableString spannableString = new SpannableString(contentEditText.getText());
+                spannableString.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.BOLD), start, end, android.text.Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                contentEditText.setText(spannableString);
+                contentEditText.setSelection(start, end);  //Reset cursor position
+            }
+
+        });
+
+        italicBtn.setOnClickListener((v)-> {
+            int start = contentEditText.getSelectionStart();
+            int end = contentEditText.getSelectionEnd();
+
+            if (start < end){
+                SpannableString spannableString = new SpannableString(contentEditText.getText());
+                spannableString.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.ITALIC), start, end, android.text.Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                contentEditText.setText(spannableString);
+                contentEditText.setSelection(start, end);  //Reset cursor position
+            }
+
+        });
+
+        underlineBtn.setOnClickListener((v)-> {
+            int start = contentEditText.getSelectionStart();
+            int end = contentEditText.getSelectionEnd();
+
+            if (start < end){
+                SpannableString spannableString = new SpannableString(contentEditText.getText());
+                spannableString.setSpan(new UnderlineSpan(), start, end, android.text.Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                contentEditText.setText(spannableString);
+                contentEditText.setSelection(start, end);  //Reset cursor position
+            }
+
+        });
 
     }
 

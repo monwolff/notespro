@@ -81,6 +81,36 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/bold_btn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="bold"
+            android:src="@drawable/baseline_format_bold_24"/>
+
+        <ImageButton
+            android:id="@+id/italic_btn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="italic"
+            android:src="@drawable/baseline_format_italic_24" />
+
+        <ImageButton
+            android:id="@+id/underline_btn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:text="Underline"
+            android:contentDescription="underline"
+            android:src="@drawable/baseline_format_underlined_24"/>
+
+    </LinearLayout>
+
     <ImageButton
         android:id="@+id/delete_note_btn"
         android:layout_width="48dp"
